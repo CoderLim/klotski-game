@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klotski 拼图游戏</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .game-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .board-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            gap: 2px;
+            background: #333;
+            padding: 10px;
+            border-radius: 15px;
+            position: relative;
+            width: 400px;
+            height: 500px;
+        }
+
+        .cell {
+            background: #e9ecef;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .piece {
+            position: absolute;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .piece:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .piece.selected {
+            border-color: #ffd700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+        }
+
+        .piece.main {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+        }
+
+        .piece.secondary {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+        }
+
+        .piece.small {
+            background: linear-gradient(45deg, #a8e6cf, #88d8c0);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(240, 147, 251, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(79, 172, 254, 0.4);
+        }
+
+        .btn-warning {
+            background: linear-gradient(45deg, #fa709a, #fee140);
+            color: white;
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(250, 112, 154, 0.4);
+        }
+
+        .direction-controls {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 150px;
+            margin: 0 auto;
+        }
+
+        .direction-btn {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .direction-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .direction-btn:active {
+            transform: scale(0.95);
+        }
+
+        .win-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+        }
+
+        .win-message h2 {
+            margin-bottom: 15px;
+            font-size: 2em;
+        }
+
+        .win-message p {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .instructions h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .instructions ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .instructions li:before {
+            content: "•";
+            color: #667eea;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        @media (max-width: 768px) {
+            .game-container {
+                padding: 20px;
+            }
+            
+            .board {
+                width: 300px;
+                height: 375px;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1>Klotski 拼图游戏</h1>
+        </div>
+
+        <div class="game-info">
+            <div class="info-item">
+                <div class="info-label">步数</div>
+                <div class="info-value" id="moves">0</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">配置</div>
+                <div class="info-value" id="config">1</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">状态</div>
+                <div class="info-value" id="status">进行中</div>
+            </div>
+        </div>
+
+        <div class="board-container">
+            <div class="board" id="board"></div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-primary" onclick="resetGame()">重置游戏</button>
+            <button class="btn btn-secondary" onclick="saveGame()">保存游戏</button>
+            <button class="btn btn-success" onclick="loadGame()">加载游戏</button>
+            <button class="btn btn-warning" onclick="changeConfig()">切换配置</button>
+        </div>
+
+        <div class="direction-controls">
+            <div></div>
+            <button class="direction-btn" onclick="movePiece(0)">↑</button>
+            <div></div>
+            <button class="direction-btn" onclick="movePiece(3)">←</button>
+            <button class="direction-btn" onclick="movePiece(2)">↓</button>
+            <button class="direction-btn" onclick="movePiece(1)">→</button>
+        </div>
+
+        <div class="instructions">
+            <h3>游戏说明</h3>
+            <ul>
+                <li>目标：将红色的大型2x2方块从底部开口处移出</li>
+                <li>点击方块选择，使用方向键或按钮移动</li>
+                <li>键盘快捷键：方向键移动，Ctrl+R重置，Ctrl+S保存，Ctrl+O加载</li>
+                <li>配置1-4：Ctrl+1到Ctrl+4切换不同起始布局</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="win-message" id="winMessage">
+        <h2>🎉 恭喜！</h2>
+        <p>你成功完成了拼图！</p>
+        <p>总步数：<span id="finalMoves">0</span></p>
+        <button class="btn btn-primary" onclick="hideWinMessage()">继续游戏</button>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html> 
