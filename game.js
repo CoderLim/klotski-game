@@ -233,7 +233,7 @@ function renderBoard() {
         pieceElement.style.top = `${piece.y * 20}%`;
         pieceElement.style.width = `${piece.w * 25}%`;
         pieceElement.style.height = `${piece.h * 20}%`;
-        pieceElement.textContent = index + 1;
+        pieceElement.textContent = ''; // 明确设置为空，去掉数字显示
 
         if (board.selected === piece) {
             pieceElement.classList.add('selected');

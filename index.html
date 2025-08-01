@@ -81,55 +81,101 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             grid-template-rows: repeat(5, 1fr);
-            gap: 2px;
-            background: #333;
-            padding: 10px;
-            border-radius: 15px;
+            gap: 3px;
+            background: linear-gradient(145deg, #2c3e50, #34495e);
+            padding: 15px;
+            border-radius: 20px;
             position: relative;
             width: 400px;
             height: 500px;
+            box-shadow: 
+                inset 0 2px 4px rgba(0, 0, 0, 0.3),
+                0 8px 32px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
         }
 
         .cell {
-            background: #e9ecef;
-            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
             position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .piece {
             position: absolute;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 2px solid transparent;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
             color: white;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            box-shadow: 
+                0 4px 8px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
 
         .piece:hover {
-            transform: scale(1.02);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: scale(1.03) translateY(-2px);
+            box-shadow: 
+                0 8px 16px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
 
         .piece.selected {
             border-color: #ffd700;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+            box-shadow: 
+                0 0 20px rgba(255, 215, 0, 0.6),
+                0 8px 16px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            transform: scale(1.02);
         }
 
         .piece.main {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            box-shadow: 
+                0 6px 12px rgba(255, 107, 107, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .piece.main:hover {
+            background: linear-gradient(135deg, #ff5252, #d84315);
+            box-shadow: 
+                0 8px 20px rgba(255, 107, 107, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
 
         .piece.secondary {
-            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            box-shadow: 
+                0 4px 8px rgba(78, 205, 196, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .piece.secondary:hover {
+            background: linear-gradient(135deg, #26d0ce, #1abc9c);
+            box-shadow: 
+                0 6px 12px rgba(78, 205, 196, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
 
         .piece.small {
-            background: linear-gradient(45deg, #a8e6cf, #88d8c0);
+            background: linear-gradient(135deg, #a8e6cf, #88d8c0);
+            box-shadow: 
+                0 3px 6px rgba(168, 230, 207, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .piece.small:hover {
+            background: linear-gradient(135deg, #98d8a8, #7dd3fc);
+            box-shadow: 
+                0 5px 10px rgba(168, 230, 207, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
 
         .controls {
@@ -210,11 +256,12 @@
             font-size: 1.2em;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .direction-btn:hover {
             transform: scale(1.1);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
         .direction-btn:active {
