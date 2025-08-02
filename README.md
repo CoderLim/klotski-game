@@ -12,6 +12,8 @@ A modern, responsive implementation of the classic Klotski sliding block puzzle 
 
 Experience the classic Klotski puzzle with modern web technology. No downloads required - play directly in your browser!
 
+<img width="800" height="692" alt="image" src="https://github.com/user-attachments/assets/fc842354-c01c-4ebd-9207-e2c066fa8449" />
+
 ## 📖 About Klotski
 
 Klotski (华容道, Huā Róng Dào) is a classic sliding block puzzle that originated in ancient China. The name translates to "Huarong Pass" and refers to a famous historical event from the Three Kingdoms period. The objective is to move the large red block (typically 2x2) from its starting position to the designated exit area.
