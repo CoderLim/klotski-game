@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Klotski Puzzle Game - Classic Sliding Block Puzzle</title>
-    <meta name="description" content="Play the classic Klotski sliding block puzzle game online. Challenge yourself with different configurations and solve the puzzle by moving the red block to the exit.">
-    <meta name="keywords" content="klotski, puzzle game, sliding blocks, brain teaser, logic game, online puzzle">
+    <title>Klotski Game</title>
     <style>
         * {
             margin: 0;
@@ -18,111 +16,10 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             color: #333;
-        }
-
-        /* Navigation Bar */
-        .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-        }
-
-        .nav-logo {
-            font-size: 1.5em;
-            font-weight: bold;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav-menu a:hover {
-            color: #667eea;
-        }
-
-        /* Game Section */
-        .game-section {
-            padding: 40px 20px;
-            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 80vh;
-        }
-
-        .game-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            max-width: 800px;
-            width: 100%;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .header h1 {
-            color: #333;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .game-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 10px;
-        }
-
-        .info-item {
-            text-align: center;
-        }
-
-        .info-label {
-            font-size: 0.9em;
-            color: #666;
-            margin-bottom: 5px;
-        }
-
-        .info-value {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #333;
         }
 
         .board-container {
@@ -146,10 +43,9 @@
                 inset 0 2px 4px rgba(0, 0, 0, 0.3),
                 0 8px 32px rgba(0, 0, 0, 0.2),
                 0 0 0 1px rgba(255, 255, 255, 0.1);
-            touch-action: none; /* Prevent default touch behaviors on the board */
+            touch-action: none;
         }
 
-        /* 底部出口区域红光特效 */
         .board::after {
             content: '';
             position: absolute;
@@ -160,13 +56,11 @@
             height: 2%;
             background: radial-gradient(ellipse at center, rgba(255, 69, 0, 0.25) 0%, rgba(255, 69, 0, 0.08) 60%, transparent 100%);
             border-radius: 15px;
-            
             pointer-events: none;
             z-index: 1;
             backdrop-filter: blur(2px);
         }
 
-        /* 出口指示器 */
         .board::before {
             content: 'EXIT';
             position: absolute;
@@ -184,8 +78,6 @@
             z-index: 2;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-
 
         .cell {
             background: rgba(255, 255, 255, 0.05);
@@ -211,8 +103,8 @@
             box-shadow: 
                 0 4px 8px rgba(0, 0, 0, 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            touch-action: none; /* Prevent default touch behaviors */
-            user-select: none; /* Prevent text selection */
+            touch-action: none;
+            user-select: none;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -342,36 +234,6 @@
             box-shadow: 0 8px 15px rgba(250, 112, 154, 0.4);
         }
 
-        .direction-controls {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            max-width: 150px;
-            margin: 0 auto;
-        }
-
-        .direction-btn {
-            width: 50px;
-            height: 50px;
-            border: none;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            font-size: 1.2em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .direction-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .direction-btn:active {
-            transform: scale(0.95);
-        }
-
         .win-message {
             position: fixed;
             top: 50%;
@@ -408,203 +270,9 @@
             display: none;
         }
 
-        .instructions {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-        }
-
-        .instructions h3 {
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .instructions ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .instructions li {
-            margin-bottom: 8px;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .instructions li:before {
-            content: "•";
-            color: #667eea;
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-
-        /* SEO Content Section */
-        .seo-section {
-            background: white;
-            padding: 60px 20px;
-        }
-
-        .seo-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .seo-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .seo-content h2 {
-            color: #333;
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-
-        .seo-content p {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .feature-card {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-        }
-
-        .feature-card h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-
-        .feature-card p {
-            color: #666;
-            line-height: 1.5;
-        }
-
-        /* Footer Styles */
-        .footer {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            padding: 40px 0 20px;
-            margin-top: 60px;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 30px;
-        }
-
-        .footer-section h3 {
-            color: #fff;
-            margin-bottom: 20px;
-            font-size: 1.3em;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .footer-section p {
-            color: #bdc3c7;
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-
-        .footer-section ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-section ul li a {
-            color: #bdc3c7;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section ul li a:hover {
-            color: #667eea;
-        }
-
-        .social-links {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .social-links a {
-            color: #bdc3c7;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: color 0.3s ease;
-            padding: 10px;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .social-links a:hover {
-            color: #667eea;
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(5px);
-        }
-
-        .social-icon {
-            font-size: 1.2em;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 20px;
-            text-align: center;
-        }
-
-        .footer-bottom p {
-            color: #95a5a6;
-            margin: 0;
-        }
-
-        .footer-bottom a {
-            color: #667eea;
-            text-decoration: none;
-        }
-
-        .footer-bottom a:hover {
-            text-decoration: underline;
-        }
-
         @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-            
-            .game-container {
-                padding: 20px;
+            body {
+                padding: 10px;
             }
             
             .board {
@@ -621,36 +289,10 @@
                 width: 200px;
             }
 
-            .seo-content {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            /* Mobile-specific optimizations */
             .piece {
-                font-size: 1em; /* Smaller text on mobile */
+                font-size: 1em;
             }
 
-            .direction-controls {
-                max-width: 200px; /* Larger touch targets */
-            }
-
-            .direction-btn {
-                width: 60px;
-                height: 60px;
-                font-size: 1.5em;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            /* 移动设备上的出口特效优化 */
             .board::after {
                 width: 55%;
                 height: 16%;
@@ -662,341 +304,29 @@
                 bottom: 6px;
                 letter-spacing: 0.5px;
             }
-
-
         }
     </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">Klotski Puzzle</div>
-            <ul class="nav-menu">
-                <li><a href="#game">Play Game</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="privacy.html">Privacy</a></li>
-                <li><a href="terms.html">Terms</a></li>
-                <li><a href="https://github.com/CoderLim/klotski-game" target="_blank" title="GitHub">GitHub</a></li>
-                <li><a href="https://x.com/klotskigame" target="_blank" title="Twitter">Twitter</a></li>
-            </ul>
-        </div>
-    </nav>
+    <div class="board-container">
+        <div class="board" id="board"></div>
+    </div>
 
-    <!-- Game Section -->
-    <section class="game-section" id="game">
-        <div class="game-container">
-            <div class="header">
-                <h1>Klotski Puzzle Game</h1>
-            </div>
-
-            <div class="game-info">
-                <div class="info-item">
-                    <div class="info-label">Moves</div>
-                    <div class="info-value" id="moves">0</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">Config</div>
-                    <div class="info-value" id="config">1</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">Status</div>
-                    <div class="info-value" id="status">Playing</div>
-                </div>
-            </div>
-
-            <div class="board-container">
-                <div class="board" id="board"></div>
-            </div>
-
-            <div class="controls">
-                <button class="btn btn-primary" onclick="resetGame()">Reset Game</button>
-                <button class="btn btn-secondary" onclick="saveGame()">Save Game</button>
-                <button class="btn btn-success" onclick="loadGame()">Load Game</button>
-                <button class="btn btn-warning" onclick="changeConfig()">Change Config</button>
-            </div>
-
-            <div class="direction-controls">
-                <div></div>
-                <button class="direction-btn" onclick="movePiece(0)">↑</button>
-                <div></div>
-                <button class="direction-btn" onclick="movePiece(3)">←</button>
-                <button class="direction-btn" onclick="movePiece(2)">↓</button>
-                <button class="direction-btn" onclick="movePiece(1)">→</button>
-            </div>
-
-            <div class="instructions">
-                <h3>How to Play</h3>
-                <ul>
-                    <li>Goal: Move the red 2x2 block to the exit at the bottom</li>
-                    <li>Drag blocks directly to move them, or use arrow keys and buttons</li>
-                    <li>Keyboard shortcuts: Arrow keys to move, Ctrl+R to reset, Ctrl+S to save, Ctrl+O to load</li>
-                    <li>Configurations 1-4: Ctrl+1 to Ctrl+4 to switch different starting layouts</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- SEO Content Section -->
-    <section class="seo-section">
-        <div class="seo-container">
-            <!-- History and Origin -->
-            <div class="seo-content">
-                <div>
-                    <h2>The Rich History of Klotski Puzzle</h2>
-                    <p>Klotski, also known as the "Huā Róng Dào" (华容道) in Chinese, is a classic sliding block puzzle that originated in ancient China. The name "Huā Róng Dào" translates to "Huarong Pass" and refers to a famous historical event from the Three Kingdoms period (220-280 AD), where the legendary general Guan Yu was said to have escaped through a narrow mountain pass.</p>
-                    <p>The puzzle was first documented in the early 20th century and gained international popularity through various publications. The name "Klotski" itself is derived from the Polish word for "wooden block," reflecting the traditional wooden construction of the physical puzzle.</p>
-                    <p>Throughout the 20th century, Klotski became a beloved brain teaser in many countries, appearing in puzzle books, educational materials, and eventually digital formats. Its enduring appeal lies in its perfect balance of simplicity and complexity.</p>
-                </div>
-                <div>
-                    <h2>Why Klotski Remains Popular Today</h2>
-                    <p>Klotski's timeless appeal stems from its elegant simplicity combined with deep strategic complexity. Unlike many modern puzzle games that rely on graphics or time pressure, Klotski focuses purely on logical thinking and spatial reasoning.</p>
-                    <p>The puzzle has been studied extensively by mathematicians and computer scientists, who have analyzed its computational complexity and developed algorithms to find optimal solutions. Some configurations have been proven to require over 100 moves to solve optimally.</p>
-                    <p>Educational researchers have found that regular puzzle-solving activities like Klotski can improve cognitive functions, enhance problem-solving abilities, and even help prevent age-related cognitive decline.</p>
-                </div>
-            </div>
-
-            <!-- Game Rules and Mechanics -->
-            <div class="seo-content">
-                <div>
-                    <h2>Understanding Klotski Game Rules</h2>
-                    <p>The objective of Klotski is straightforward: move the large red block (typically 2x2 in size) from its starting position to the designated exit area, usually located at the bottom center of the board. However, achieving this goal requires careful planning and strategic thinking.</p>
-                    <p>All blocks can only move horizontally or vertically, never diagonally. Blocks cannot be lifted or rotated - they must slide along the available paths. The challenge lies in the limited space and the need to coordinate multiple blocks to create temporary pathways.</p>
-                    <p>Each configuration presents a unique challenge with different optimal solutions. Some puzzles can be solved in as few as 20 moves, while others may require 100+ moves for the most efficient solution. The beauty of Klotski is that there are often multiple valid solutions, allowing players to find their own path to success.</p>
-                </div>
-                <div>
-                    <h2>Advanced Strategies and Techniques</h2>
-                    <p>Successful Klotski solving requires several key strategies. First, identify the "key blocks" - those that must be moved to create space for the main block. Look for blocks that can act as "bridges" or temporary supports.</p>
-                    <p>Plan several moves ahead by visualizing the board state after each move. Consider the concept of "blocking" - sometimes you need to move blocks into positions that temporarily block other pieces, only to move them again later.</p>
-                    <p>Learn to recognize common patterns and sequences that appear across different configurations. Many experienced players develop a mental library of useful move sequences that can be adapted to new situations.</p>
-                </div>
-            </div>
-
-            <!-- Educational Benefits -->
-            <div class="seo-content">
-                <div>
-                    <h2>Educational Benefits of Klotski</h2>
-                    <p>Klotski is an excellent educational tool that develops multiple cognitive skills simultaneously. It enhances spatial reasoning by requiring players to visualize how blocks will move and interact in three-dimensional space.</p>
-                    <p>The puzzle improves logical thinking and planning abilities, as players must think several moves ahead and consider the consequences of each action. It also develops patience and persistence, as complex configurations may require many attempts to solve.</p>
-                    <p>Research has shown that puzzle-solving activities like Klotski can improve working memory, enhance concentration, and even boost mathematical reasoning skills. Many educators use Klotski and similar puzzles to teach problem-solving strategies and logical thinking.</p>
-                </div>
-                <div>
-                    <h2>Mathematical and Computational Aspects</h2>
-                    <p>From a mathematical perspective, Klotski is a fascinating example of state-space search problems. Each board configuration represents a "state," and each valid move creates a transition to a new state. The goal is to find a path from the initial state to the goal state.</p>
-                    <p>Computer scientists have used Klotski to develop and test various search algorithms, including breadth-first search, depth-first search, and more sophisticated heuristic methods. The puzzle has been used to teach concepts in artificial intelligence and algorithm design.</p>
-                    <p>Some configurations of Klotski have been proven to be NP-complete, meaning they belong to a class of problems that are computationally difficult to solve optimally. This makes Klotski not just a recreational puzzle, but also a subject of serious mathematical study.</p>
-                </div>
-            </div>
-
-            <!-- Cultural Significance -->
-            <div class="seo-content">
-                <div>
-                    <h2>Cultural Significance and Global Appeal</h2>
-                    <p>Klotski's cultural significance extends beyond its Chinese origins. The puzzle has been embraced by cultures worldwide, each adding their own variations and interpretations. In Japan, similar sliding block puzzles are known as "Sokoban" variations.</p>
-                    <p>The puzzle's universal appeal lies in its accessibility - it requires no language skills, no cultural background, and no special equipment beyond the puzzle itself. This makes it an ideal tool for cross-cultural communication and education.</p>
-                    <p>Throughout history, sliding block puzzles have appeared in various forms across different cultures, from ancient Egyptian sliding tile games to medieval European puzzle boxes. Klotski represents one of the most refined and challenging examples of this ancient puzzle tradition.</p>
-                </div>
-                <div>
-                    <h2>Modern Digital Adaptations</h2>
-                    <p>The digital age has brought new life to Klotski, making it accessible to millions of people worldwide through computers, smartphones, and tablets. Digital versions offer advantages like undo/redo functions, move counters, and the ability to save progress.</p>
-                    <p>Modern implementations often include multiple difficulty levels, hint systems, and even solution finders that can demonstrate optimal solutions. Some versions incorporate additional features like time challenges, move limits, or competitive scoring systems.</p>
-                    <p>The online version you're playing now represents the latest evolution of this ancient puzzle, combining traditional gameplay with modern convenience and accessibility features.</p>
-                </div>
-            </div>
-
-            <!-- Features Grid -->
-            <div class="features-grid">
-                <div class="feature-card">
-                    <h3>Multiple Configurations</h3>
-                    <p>Choose from 4 different starting layouts, each offering a unique challenge and requiring different strategies to solve. Each configuration has been carefully designed to provide a distinct puzzle-solving experience.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Save & Load Progress</h3>
-                    <p>Save your current game state and return to it later, allowing you to tackle complex puzzles at your own pace. Perfect for long puzzle sessions or when you need to take a break.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Move Counter</h3>
-                    <p>Track your progress with a move counter that helps you optimize your solution and achieve the best possible score. Challenge yourself to find the most efficient solution.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Responsive Design</h3>
-                    <p>Enjoy the game on any device with our responsive design that adapts to desktop, tablet, and mobile screens. Play anywhere, anytime with seamless cross-device compatibility.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Keyboard Controls</h3>
-                    <p>Use keyboard shortcuts for quick actions, making the game more accessible and efficient to play. Master the controls to solve puzzles faster and more intuitively.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Visual Feedback</h3>
-                    <p>Clear visual indicators show selected blocks and valid moves, making the game intuitive and easy to understand. Enhanced visual design helps you focus on strategy.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Historical Context</h3>
-                    <p>Experience a puzzle with rich cultural heritage dating back to ancient China. Learn about the historical significance while enjoying modern gameplay mechanics.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Educational Value</h3>
-                    <p>Improve cognitive skills including spatial reasoning, logical thinking, and problem-solving abilities. Perfect for students, educators, and anyone seeking mental stimulation.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Optimal Solutions</h3>
-                    <p>Challenge yourself to find the most efficient solutions. Some configurations have been mathematically proven to require specific minimum move counts.</p>
-                </div>
-            </div>
-
-            <!-- Game Configurations -->
-            <div class="seo-content">
-                <div>
-                    <h2>The Classic Klotski Layout: "横刀立马"</h2>
-                    <p>The most famous and widely recognized Klotski configuration is known as "横刀立马" (Heng Dao Li Ma), which translates to "Drawing Sword and Mounting Horse." This classic arrangement features the main 2x2 red block positioned at the top center, flanked by two 1x2 vertical blocks representing the "sword" and "horse." The bottom area contains a strategic mix of 1x1 and 1x2 blocks that create the exit pathway.</p>
-                    <p>According to historical records, this configuration was first documented by John Harold Fleming in 1932 when he applied for a British patent (Patent No. 411515). The "横刀立马" layout has been extensively studied by puzzle enthusiasts worldwide and represents the standard Klotski puzzle that most people recognize.</p>
-                    <p>The optimal solution for "横刀立马" typically requires between 80-120 moves, making it a moderate challenge that's perfect for both beginners and experienced players. The key strategy involves carefully managing the vertical blocks that act as barriers and learning to coordinate their movements to create temporary pathways.</p>
-                </div>
-                <div>
-                    <h2>The 32 Klotski Variants: A Rich Puzzle Tradition</h2>
-                    <p>Beyond the classic "横刀立马" layout, Klotski enthusiasts have developed and documented over 32 different configurations, each offering unique challenges and solving strategies. These variants include famous arrangements like "将拥曹营" (General Guarding Cao's Camp), "兵分三路" (Troops Divided in Three Ways), and "层层设防" (Multiple Layers of Defense).</p>
-                    <p>Each of these 32 Klotski variants presents different difficulty levels, ranging from simple configurations that can be solved in 20-30 moves to complex arrangements requiring 150+ moves for optimal solutions. Some variants feature different block arrangements, while others introduce new block shapes or sizes, creating endless possibilities for puzzle enthusiasts.</p>
-                    <p>The development of these 32 Klotski variants demonstrates the puzzle's enduring appeal and the creativity of its community. Many of these configurations have been passed down through generations, while others have been discovered and refined by modern puzzle researchers and enthusiasts.</p>
-                </div>
-            </div>
-
-            <div class="seo-content">
-                <div>
-                    <h2>Historical Klotski Configurations</h2>
-                    <p>The earliest documented Klotski variant was the "Pennant Puzzle," patented by Lewis W. Hardy in 1909 (U.S. Patent 1,017,752). This precursor to modern Klotski featured a different block arrangement but shared the same sliding block mechanics. The puzzle was produced by Chicago's OK Novelty company and represents the foundation upon which modern Klotski was built.</p>
-                    <p>Following Fleming's 1932 patent, Klotski gained popularity in China during the 1940s, where it became known as "华容道" (Huarong Pass). The name references a famous historical event from the Three Kingdoms period, where the legendary general Guan Yu escaped through a narrow mountain pass. This cultural connection helped establish Klotski as a beloved traditional puzzle in Chinese culture.</p>
-                    <p>Throughout the 20th century, various Klotski configurations were developed and refined, with each variant offering new challenges and insights into puzzle-solving strategies. The 32 documented variants represent the culmination of decades of puzzle research and community contributions.</p>
-                </div>
-                <div>
-                    <h2>Modern Klotski Variations</h2>
-                    <p>Contemporary Klotski enthusiasts continue to explore new configurations and variations. Modern variants often incorporate different block shapes, board sizes, or additional gameplay elements while maintaining the core sliding block mechanics that make Klotski so engaging.</p>
-                    <p>Some modern Klotski variations include computer-generated configurations that push the boundaries of puzzle complexity, while others focus on educational applications by creating configurations specifically designed to teach particular problem-solving skills. The digital age has made it easier than ever to create, test, and share new Klotski variants.</p>
-                    <p>The ongoing development of new Klotski configurations ensures that the puzzle remains fresh and challenging for players of all skill levels. Whether you're a beginner exploring the classic "横刀立马" or an advanced player tackling complex modern variants, there's always a new Klotski challenge waiting to be discovered.</p>
-                </div>
-            </div>
-
-            <!-- Configuration Comparison -->
-            <div class="seo-content">
-                <div>
-                    <h2>Exploring the 32 Klotski Variants</h2>
-                    <p>The 32 documented Klotski variants offer an incredible range of puzzle-solving experiences, from simple beginner-friendly configurations to complex arrangements that challenge even the most experienced players. Each variant presents unique strategic requirements and solving approaches.</p>
-                    <p>Difficulty levels across the 32 variants vary dramatically: simple configurations like "兵分三路" can be solved in 20-30 moves, while complex arrangements like "层层设防" may require 150+ moves for optimal solutions. This wide range ensures that there's a perfect Klotski challenge for every skill level.</p>
-                    <p>Players are encouraged to explore multiple variants to develop a comprehensive understanding of Klotski solving techniques. Each variant teaches different aspects of puzzle-solving, from basic spatial reasoning to advanced strategic planning and pattern recognition.</p>
-                </div>
-                <div>
-                    <h2>Selecting Your Klotski Challenge</h2>
-                    <p>For beginners, we recommend starting with the classic "横刀立马" layout to learn the fundamental principles of Klotski solving. This configuration provides the perfect balance of challenge and accessibility, making it ideal for developing core puzzle-solving skills.</p>
-                    <p>Intermediate players can explore variants like "将拥曹营" and "兵分三路" to develop more advanced techniques. Advanced players may prefer complex configurations that require sophisticated strategic thinking and long-term planning.</p>
-                    <p>The beauty of having 32 variants is that there's always a new challenge waiting. Many enthusiasts enjoy systematically working through different configurations, while others prefer to focus on mastering specific variants that particularly appeal to their solving style.</p>
-                </div>
-            </div>
-
-            <!-- Klotski Deep Dive -->
-            <div class="seo-content">
-                <div>
-                    <h2>Why Klotski Stands Out Among Puzzle Games</h2>
-                    <p>Klotski distinguishes itself from other puzzle games through its perfect balance of simplicity and complexity. Unlike many modern puzzle games that rely on flashy graphics or time pressure, Klotski focuses purely on logical thinking and strategic planning. This makes Klotski an ideal choice for players who appreciate intellectual challenges.</p>
-                    <p>The beauty of Klotski lies in its universal appeal - it transcends age, language, and cultural barriers. Whether you're a child learning spatial reasoning or an adult seeking mental stimulation, Klotski provides an engaging experience that grows with your skill level. The puzzle's timeless nature ensures that Klotski remains relevant and challenging regardless of technological advances.</p>
-                    <p>What makes Klotski particularly special is its mathematical elegance. Each Klotski configuration represents a unique state-space problem that can be analyzed and solved using various algorithmic approaches. This mathematical foundation gives Klotski a depth that casual puzzle games simply cannot match.</p>
-                </div>
-                <div>
-                    <h2>The Evolution of Klotski Through the Ages</h2>
-                    <p>The journey of Klotski from its ancient Chinese origins to modern digital platforms represents a fascinating evolution of puzzle design. Early versions of Klotski were crafted from wood, with each piece carefully carved to fit precisely within the puzzle frame. These physical Klotski puzzles were treasured possessions, often passed down through generations.</p>
-                    <p>As Klotski gained international popularity, various cultures adapted the puzzle to reflect their own traditions and preferences. European versions of Klotski often featured more ornate designs, while Asian variations maintained the puzzle's mathematical purity. This cultural diversity has enriched the Klotski tradition and created numerous variations of the original concept.</p>
-                    <p>Today's digital Klotski represents the latest chapter in this evolutionary story. Modern Klotski implementations preserve the puzzle's essential character while adding features that enhance the user experience. The digital format has made Klotski more accessible than ever, allowing millions of people worldwide to enjoy this classic puzzle.</p>
-                </div>
-            </div>
-
-            <div class="seo-content">
-                <div>
-                    <h2>Klotski as a Learning Tool</h2>
-                    <p>Educators worldwide have recognized Klotski's potential as a powerful learning tool. The puzzle's structured approach to problem-solving makes Klotski an excellent introduction to logical thinking and mathematical concepts. Students who engage with Klotski develop critical thinking skills that transfer to other academic subjects.</p>
-                    <p>The systematic nature of Klotski solving teaches important life skills such as planning, patience, and persistence. When working with Klotski, players learn to break down complex problems into manageable steps, a skill that's valuable in both academic and professional settings. The puzzle's immediate feedback system helps players understand the consequences of their decisions.</p>
-                    <p>Research has shown that regular engagement with Klotski can improve cognitive functions in people of all ages. The puzzle's spatial reasoning requirements help maintain and enhance brain plasticity, making Klotski a valuable tool for cognitive health. Many rehabilitation programs use Klotski and similar puzzles to help patients recover cognitive function.</p>
-                </div>
-                <div>
-                    <h2>The Future of Klotski Gaming</h2>
-                    <p>As technology continues to advance, Klotski is poised to reach new audiences and evolve in exciting ways. Virtual reality implementations of Klotski could provide immersive puzzle-solving experiences, while artificial intelligence could offer personalized Klotski challenges tailored to individual skill levels. The core appeal of Klotski will remain unchanged, but the delivery methods will continue to innovate.</p>
-                    <p>Online Klotski communities are growing, with players sharing strategies, competing for fastest solve times, and creating new Klotski variations. These communities demonstrate the enduring appeal of Klotski and its ability to bring people together across geographical and cultural boundaries. The social aspect of Klotski adds another dimension to the puzzle-solving experience.</p>
-                    <p>Educational institutions are increasingly incorporating Klotski into their curricula, recognizing the puzzle's value in developing computational thinking skills. As coding and programming become more important in education, Klotski provides a perfect bridge between traditional puzzle-solving and modern computational concepts.</p>
-                </div>
-            </div>
-
-            <!-- Tips and Strategies -->
-            <div class="seo-content">
-                <div>
-                    <h2>Pro Tips for Mastering Klotski</h2>
-                    <p>Start by analyzing the board layout and identifying the main block's path to the exit. Look for potential obstacles and plan how to clear them. Remember that sometimes you need to move blocks away from the exit to create space for the main block.</p>
-                    <p>Pay attention to the "key blocks" - those that control access to important areas. These are often the 1x2 vertical blocks that can act as barriers or bridges. Learning to manipulate these key blocks efficiently is crucial for solving complex configurations.</p>
-                    <p>Don't be afraid to experiment with different approaches. Sometimes the most obvious moves aren't the most effective. Try working backwards from the goal state to understand what needs to happen at each step.</p>
-                </div>
-                <div>
-                    <h2>Common Mistakes to Avoid</h2>
-                    <p>One common mistake is focusing too much on moving the main block immediately. Often, you need to set up the board by moving other blocks first. Another mistake is not planning several moves ahead - each move should contribute to a larger strategy.</p>
-                    <p>Avoid getting stuck in repetitive patterns. If you find yourself making the same moves repeatedly without progress, step back and try a completely different approach. Sometimes the solution requires thinking outside the box.</p>
-                    <p>Don't underestimate the importance of small blocks. While the 1x1 blocks may seem insignificant, they often play crucial roles in creating temporary pathways or blocking unwanted movements.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Klotski Puzzle Game</h3>
-                    <p>Experience the timeless challenge of the classic Chinese sliding block puzzle. Play online, learn strategies, and master the art of Klotski.</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#game">Play Game</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Connect With Us</h3>
-                    <div class="social-links">
-                        <a href="https://github.com/CoderLim/klotski-game" target="_blank" title="GitHub">
-                            <span class="social-icon">📦</span> GitHub
-                        </a>
-                        <a href="https://x.com/klotskigame" target="_blank" title="Twitter">
-                            <span class="social-icon">🐦</span> Twitter
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Klotski Puzzle Game. All rights reserved. | <a href="terms.html">Terms of Service</a></p>
-            </div>
-        </div>
-    </footer>
+    <div class="controls">
+        <button class="btn btn-primary" onclick="resetGame()">Reset</button>
+        <button class="btn btn-secondary" onclick="saveGame()">Save</button>
+        <button class="btn btn-success" onclick="loadGame()">Load</button>
+        <button class="btn btn-warning" onclick="changeConfig()">Config</button>
+    </div>
 
     <div class="overlay" id="overlay"></div>
     <div class="win-message" id="winMessage">
         <h2>🎉 Congratulations!</h2>
-        <p>You successfully completed the puzzle!</p>
+        <p>You completed the puzzle!</p>
         <p>Total moves: <span id="finalMoves">0</span></p>
-        <button class="btn btn-primary" onclick="hideWinMessage()">Continue Playing</button>
+        <button class="btn btn-primary" onclick="hideWinMessage()">Continue</button>
     </div>
 
     <script src="game.js"></script>
-
-    <script defer data-domain="klotski.org" src="https://app.pageview.app/js/script.js"></script>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5TSYMD7CPL"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-5TSYMD7CPL');
-    </script>
 </body>
 </html> 

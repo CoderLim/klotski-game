@@ -234,7 +234,7 @@ function renderBoard() {
         pieceElement.style.top = `${piece.y * 20}%`;
         pieceElement.style.width = `${piece.w * 25}%`;
         pieceElement.style.height = `${piece.h * 20}%`;
-                        pieceElement.textContent = ''; // Set to empty to remove number display
+        pieceElement.textContent = ''; // Set to empty to remove number display
 
         if (board.selected === piece) {
             pieceElement.classList.add('selected');
@@ -300,11 +300,6 @@ function renderBoard() {
 
         boardElement.appendChild(pieceElement);
     });
-
-    // Update info
-    document.getElementById('moves').textContent = board.moves;
-    document.getElementById('config').textContent = board.configuration;
-    document.getElementById('status').textContent = board.hasWon ? 'Completed' : 'Playing';
 
     if (board.hasWon) {
         showWinMessage();
@@ -431,14 +426,10 @@ document.addEventListener('mousemove', (e) => {
     }
 });
 
-
-
 document.addEventListener('mouseup', () => {
     isDragging = false;
     hasMoved = false; // Reset move flag when mouse is released
 });
-
-
 
 // Initialize the game
 renderBoard(); 
