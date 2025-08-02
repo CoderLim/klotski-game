@@ -146,6 +146,7 @@
                 inset 0 2px 4px rgba(0, 0, 0, 0.3),
                 0 8px 32px rgba(0, 0, 0, 0.2),
                 0 0 0 1px rgba(255, 255, 255, 0.1);
+            touch-action: none; /* Prevent default touch behaviors on the board */
         }
 
         .cell {
@@ -172,6 +173,11 @@
             box-shadow: 
                 0 4px 8px rgba(0, 0, 0, 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            touch-action: none; /* Prevent default touch behaviors */
+            user-select: none; /* Prevent text selection */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
 
         .piece:hover {
@@ -480,6 +486,21 @@
 
             .features-grid {
                 grid-template-columns: 1fr;
+            }
+
+            /* Mobile-specific optimizations */
+            .piece {
+                font-size: 1em; /* Smaller text on mobile */
+            }
+
+            .direction-controls {
+                max-width: 200px; /* Larger touch targets */
+            }
+
+            .direction-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5em;
             }
         }
     </style>

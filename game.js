@@ -251,6 +251,53 @@ function renderBoard() {
             renderBoard();
         });
 
+        // Touch support for mobile devices
+        pieceElement.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            isDragging = true;
+            hasMoved = false;
+            const touch = e.touches[0];
+            dragStartX = touch.clientX;
+            dragStartY = touch.clientY;
+            board.selectPiece(piece.x, piece.y);
+            renderBoard();
+        });
+
+        // Touch move handling for mobile devices
+        pieceElement.addEventListener('touchmove', (e) => {
+            if (isDragging && !hasMoved) {
+                e.preventDefault();
+                e.stopPropagation();
+                const touch = e.touches[0];
+                const deltaX = touch.clientX - dragStartX;
+                const deltaY = touch.clientY - dragStartY;
+                
+                if (Math.abs(deltaX) > 30 || Math.abs(deltaY) > 30) {
+                    let direction = -1;
+                    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                        direction = deltaX > 0 ? 1 : 3; // right or left
+                    } else {
+                        direction = deltaY > 0 ? 2 : 0; // down or up
+                    }
+                    
+                    if (board.movePiece(direction)) {
+                        renderBoard();
+                        hasMoved = true;
+                    }
+                    isDragging = false;
+                }
+            }
+        }, { passive: false });
+
+        // Touch end for each piece
+        pieceElement.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            isDragging = false;
+            hasMoved = false;
+        });
+
         boardElement.appendChild(pieceElement);
     });
 
@@ -384,10 +431,14 @@ document.addEventListener('mousemove', (e) => {
     }
 });
 
+
+
 document.addEventListener('mouseup', () => {
     isDragging = false;
     hasMoved = false; // Reset move flag when mouse is released
 });
+
+
 
 // Initialize the game
 renderBoard(); 
