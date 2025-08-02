@@ -179,6 +179,12 @@
             box-shadow: 
                 0 8px 16px rgba(0, 0, 0, 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            cursor: grab;
+        }
+
+        .piece:active {
+            cursor: grabbing;
+            transform: scale(1.02) translateY(-1px);
         }
 
         .piece.selected {
@@ -538,7 +544,7 @@
                 <h3>How to Play</h3>
                 <ul>
                     <li>Goal: Move the red 2x2 block to the exit at the bottom</li>
-                    <li>Click on blocks to select, use arrow keys or buttons to move</li>
+                    <li>Drag blocks directly to move them, or use arrow keys and buttons</li>
                     <li>Keyboard shortcuts: Arrow keys to move, Ctrl+R to reset, Ctrl+S to save, Ctrl+O to load</li>
                     <li>Configurations 1-4: Ctrl+1 to Ctrl+4 to switch different starting layouts</li>
                 </ul>

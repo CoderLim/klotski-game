@@ -209,6 +209,7 @@ class Board {
 let board = new Board();
 let isDragging = false;
 let dragStartX, dragStartY;
+let hasMoved = false; // Prevent multiple moves from single drag
 
 function renderBoard() {
     const boardElement = document.getElementById('board');
@@ -239,16 +240,13 @@ function renderBoard() {
             pieceElement.classList.add('selected');
         }
 
-        pieceElement.addEventListener('click', () => {
-            board.selectPiece(piece.x, piece.y);
-            renderBoard();
-        });
-
-        // Drag functionality
+        // Direct drag functionality - no need to select first
         pieceElement.addEventListener('mousedown', (e) => {
             isDragging = true;
+            hasMoved = false; // Reset move flag
             dragStartX = e.clientX;
             dragStartY = e.clientY;
+            // Automatically select the piece being dragged
             board.selectPiece(piece.x, piece.y);
             renderBoard();
         });
@@ -361,13 +359,14 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Mouse drag functionality
+// Enhanced mouse drag functionality
 document.addEventListener('mousemove', (e) => {
-    if (isDragging && board.selected) {
+    if (isDragging && board.selected && !hasMoved) {
         const deltaX = e.clientX - dragStartX;
         const deltaY = e.clientY - dragStartY;
         
-        if (Math.abs(deltaX) > 30 || Math.abs(deltaY) > 30) {
+        // Increased threshold to prevent accidental moves
+        if (Math.abs(deltaX) > 40 || Math.abs(deltaY) > 40) {
             let direction = -1;
             if (Math.abs(deltaX) > Math.abs(deltaY)) {
                 direction = deltaX > 0 ? 1 : 3; // right or left
@@ -377,7 +376,9 @@ document.addEventListener('mousemove', (e) => {
             
             if (board.movePiece(direction)) {
                 renderBoard();
+                hasMoved = true; // Mark that a move has been made
             }
+            // Stop dragging after one move to prevent multiple moves
             isDragging = false;
         }
     }
@@ -385,6 +386,7 @@ document.addEventListener('mousemove', (e) => {
 
 document.addEventListener('mouseup', () => {
     isDragging = false;
+    hasMoved = false; // Reset move flag when mouse is released
 });
 
 // Initialize the game
