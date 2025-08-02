@@ -234,7 +234,7 @@ function renderBoard() {
         pieceElement.style.top = `${piece.y * 20}%`;
         pieceElement.style.width = `${piece.w * 25}%`;
         pieceElement.style.height = `${piece.h * 20}%`;
-        pieceElement.textContent = ''; // 明确设置为空，去掉数字显示
+                        pieceElement.textContent = ''; // Set to empty to remove number display
 
         if (board.selected === piece) {
             pieceElement.classList.add('selected');
@@ -304,7 +304,7 @@ function renderBoard() {
     // Update info
     document.getElementById('moves').textContent = board.moves;
     document.getElementById('config').textContent = board.configuration;
-    document.getElementById('status').textContent = board.hasWon ? '已完成' : '进行中';
+    document.getElementById('status').textContent = board.hasWon ? 'Completed' : 'Playing';
 
     if (board.hasWon) {
         showWinMessage();
@@ -331,7 +331,7 @@ function changeConfig() {
 function saveGame() {
     const gameState = board.toString();
     localStorage.setItem('klotski_save', gameState);
-    alert('游戏已保存！');
+    alert('Game saved!');
 }
 
 function loadGame() {
@@ -339,9 +339,9 @@ function loadGame() {
     if (savedState) {
         board.fromString(savedState);
         renderBoard();
-        alert('游戏已加载！');
+        alert('Game loaded!');
     } else {
-        alert('没有找到保存的游戏！');
+        alert('No saved game found!');
     }
 }
 
