@@ -149,6 +149,44 @@
             touch-action: none; /* Prevent default touch behaviors on the board */
         }
 
+        /* 底部出口区域红光特效 */
+        .board::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 45%;
+            height: 2%;
+            background: radial-gradient(ellipse at center, rgba(255, 69, 0, 0.25) 0%, rgba(255, 69, 0, 0.08) 60%, transparent 100%);
+            border-radius: 15px;
+            
+            pointer-events: none;
+            z-index: 1;
+            backdrop-filter: blur(2px);
+        }
+
+        /* 出口指示器 */
+        .board::before {
+            content: 'EXIT';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.75em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-shadow: 
+                0 0 8px rgba(255, 69, 0, 0.8),
+                0 0 16px rgba(255, 69, 0, 0.4);
+            pointer-events: none;
+            z-index: 2;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+
+
         .cell {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 8px;
@@ -611,6 +649,21 @@
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
+
+            /* 移动设备上的出口特效优化 */
+            .board::after {
+                width: 55%;
+                height: 16%;
+                bottom: 10px;
+            }
+
+            .board::before {
+                font-size: 0.65em;
+                bottom: 6px;
+                letter-spacing: 0.5px;
+            }
+
+
         }
     </style>
 </head>
