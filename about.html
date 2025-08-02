@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Klotski Puzzle Game</title>
+    <meta name="description" content="Learn about the Klotski puzzle game team, our mission and vision.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #667eea;
+        }
+
+        .main-content {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-header h1 {
+            color: white;
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2em;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .content-section h2 {
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 2.2em;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content-section p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        .mission-vision {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .mission-card, .vision-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .mission-card h3, .vision-card h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .mission-card p, .vision-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .team-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+
+        .member-avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .member-name {
+            color: #333;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .member-role {
+            color: #667eea;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .member-bio {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .values-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .value-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .value-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .value-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5em;
+        }
+
+        .value-title {
+            color: #333;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .value-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .timeline-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline {
+            position: relative;
+            margin-top: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            width: 45%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 55%;
+        }
+
+        .timeline-content {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -20px;
+            border-left-color: #f8f9fa;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -20px;
+            border-right-color: #f8f9fa;
+        }
+
+        .timeline-date {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .timeline-title {
+            color: #333;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .timeline-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .mission-vision {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5em;
+            }
+            
+            .content-section {
+                padding: 30px 20px;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 50px;
+            }
+            
+            .timeline-content::before {
+                left: -20px !important;
+                border-right-color: #f8f9fa !important;
+                border-left-color: transparent !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">Klotski Puzzle</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Play Game</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+                <li><a href="terms.html">Terms</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="page-header">
+            <h1>About Us</h1>
+            <p>We are dedicated to bringing the classic Klotski puzzle game into the digital age, providing quality puzzle gaming experiences for players worldwide.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Our Story</h2>
+            <p>The Klotski puzzle game project began with a deep love for classic puzzle games. Klotski, as a traditional Chinese intellectual game with hundreds of years of history, has captivated us with its unique game mechanics and rich cultural heritage.</p>
+            <p>Our team consists of professionals passionate about game development, mathematics, and traditional culture. We believe that reinterpreting classic games through modern technology not only preserves cultural heritage but also provides quality entertainment experiences for modern players.</p>
+            <p>Since the project's inception, we have been committed to creating a Klotski game platform that maintains the authentic gaming experience while incorporating modern convenience features. We hope that through this platform, more people will learn about and fall in love with this classic intellectual game.</p>
+        </div>
+
+        <div class="mission-vision">
+            <div class="mission-card">
+                <h3>Our Mission</h3>
+                <p>To preserve and promote the classic Klotski puzzle game, making its unique charm accessible to more people through modern technology, while providing quality puzzle entertainment experiences for players.</p>
+            </div>
+            <div class="vision-card">
+                <h3>Our Vision</h3>
+                <p>To become the world's most popular Klotski game platform, connecting players from different cultural backgrounds to explore the infinite possibilities of puzzle games together.</p>
+            </div>
+        </div>
+
+        <div class="values-section">
+            <h2>Our Values</h2>
+            <div class="values-grid">
+                <div class="value-item">
+                    <div class="value-icon">🎯</div>
+                    <div class="value-title">Quality Focus</div>
+                    <div class="value-description">We always prioritize game quality, ensuring every detail is carefully crafted.</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">🤝</div>
+                    <div class="value-title">User-Centric</div>
+                    <div class="value-description">We value feedback from every user and continuously improve our products to meet user needs.</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">🌍</div>
+                    <div class="value-title">Cultural Heritage</div>
+                    <div class="value-description">We are committed to preserving and passing on traditional culture, allowing classic games to thrive in modern times.</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">💡</div>
+                    <div class="value-title">Innovation</div>
+                    <div class="value-description">We continuously explore new technologies and methods to bring better gaming experiences to users.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-section">
+            <h2>Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar">J</div>
+                    <div class="member-name">John Smith</div>
+                    <div class="member-role">Project Lead</div>
+                    <div class="member-bio">10+ years of game development experience, specializing in puzzle game design and user experience optimization.</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">S</div>
+                    <div class="member-name">Sarah Johnson</div>
+                    <div class="member-role">Technical Director</div>
+                    <div class="member-bio">Senior frontend developer, expert in modern web technologies and game engine development.</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">M</div>
+                    <div class="member-name">Mike Chen</div>
+                    <div class="member-role">UI/UX Designer</div>
+                    <div class="member-bio">Specializes in user interface design and user experience optimization, making games more beautiful and user-friendly.</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">D</div>
+                    <div class="member-name">Dr. Emily Wang</div>
+                    <div class="member-role">Algorithm Expert</div>
+                    <div class="member-bio">PhD in Mathematics, specializing in puzzle game algorithm optimization and solution analysis.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-section">
+            <h2>Development Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">January 2023</div>
+                        <div class="timeline-title">Project Launch</div>
+                        <div class="timeline-description">Team formation and initiation of Klotski game project planning and design work.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">June 2023</div>
+                        <div class="timeline-title">Core Development</div>
+                        <div class="timeline-description">Completed core game logic development, implementing basic Klotski game functionality.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">December 2023</div>
+                        <div class="timeline-title">Beta Release</div>
+                        <div class="timeline-description">Completed beta version, inviting core users for testing and feedback collection.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">March 2024</div>
+                        <div class="timeline-title">Official Launch</div>
+                        <div class="timeline-description">Game officially launched, providing quality Klotski gaming experiences for players worldwide.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Technical Features</h2>
+            <p>Our Klotski game is developed using modern web technologies, ensuring smooth gaming experiences across various devices. The game supports multiple configurations, from simple entry-level to complex expert-level, meeting the needs of players at different skill levels.</p>
+            <p>We pay special attention to responsive design, ensuring perfect operation on desktop computers, tablets, and smartphones. Additionally, we have implemented local storage functionality, allowing players to save and restore game progress at any time.</p>
+            <p>In terms of algorithms, we use advanced search algorithms to verify game solvability and provide reference for optimal solutions. This ensures that each game configuration is carefully designed with reasonable difficulty and entertainment value.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Future Plans</h2>
+            <p>We plan to add more features in future versions, including multiplayer battle modes, leaderboard systems, custom level editors, and more. We will also develop mobile applications, allowing players to enjoy Klotski games anytime, anywhere.</p>
+            <p>Simultaneously, we plan to collaborate with educational institutions to introduce Klotski games into classrooms as teaching tools for mathematical thinking and logical reasoning. We believe that through gamification, we can better stimulate students' learning interest and thinking abilities.</p>
+            <p>We will continue to deeply research the mathematical principles and algorithm optimization of Klotski, providing more valuable research results for academia and puzzle enthusiasts.</p>
+        </div>
+    </div>
+</body>
+</html> 
