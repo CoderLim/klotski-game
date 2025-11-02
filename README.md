@@ -8,7 +8,7 @@ A modern, responsive implementation of the classic Klotski sliding block puzzle 
 
 ## 🌟 Live Demo
 
-**Play the game online:** [https://klotski.org](https://klotski.org)
+**Play the game online:** [Klotski](https://klotski.org)
 
 Experience the classic Klotski puzzle with modern web technology. No downloads required - play directly in your browser!
 
@@ -220,4 +220,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 *Experience the timeless challenge of Klotski - where strategy meets tradition in a modern web interface.*
 
-**Play Now**: [https://klotski.org](https://klotski.org) | **Learn More**: [About Klotski](https://klotski.org/about.html) | **Contact**: [Get in Touch](https://klotski.org/contact.html) 
+**Play Now**: [Klotski](https://klotski.org) | **Learn More**: [About Klotski](https://klotski.org/about.html) | **Contact**: [Get in Touch](https://klotski.org/contact.html)
+
+**More Games**: [15 Puzzle](https://klotski.org/game/15-puzzle)、[Mahjong Link](https://klotski.org/game/mahjong-link)
