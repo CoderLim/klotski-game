@@ -12,7 +12,8 @@ A modern, responsive implementation of the classic Klotski sliding block puzzle 
 
 Experience the classic Klotski puzzle with modern web technology. No downloads required - play directly in your browser!
 
-<img width="800" height="692" alt="image" src="https://github.com/user-attachments/assets/fc842354-c01c-4ebd-9207-e2c066fa8449" />
+<img width="886" height="493" alt="image" src="https://github.com/user-attachments/assets/67343daa-b863-4f5e-8cb8-a67a5782e755" />
+
 
 ## 📖 About Klotski
 
